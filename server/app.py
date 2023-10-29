@@ -2,7 +2,11 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, request, jsonify
 
+
+db = SQLAlchemy()
+
 from models import Restaurant, Pizza, RestaurantPizza, db
+
 
 app = Flask(__name__)
 

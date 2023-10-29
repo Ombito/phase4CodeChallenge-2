@@ -1,43 +1,36 @@
-from flask_sqlalchemy import sqlalchemy 
+from app import db
 
-db = sqlalchemy()
-
-    # restaurant table
 class Restaurant(db.Model):
-    __tablename__ = 'restaurants'
+    __tablename__ = 'restaurants'  
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
-    address = db.Column(db.String)
-
-    pizzas = db.relationship('Pizza', secondary='restaurant_pizzas', backref='restaurants')
+    name = db.Column(db.String(255), nullable=False)
+    address = db.Column(db.String(255), nullable=False)
 
     def __repr__(self):
-        return f'<Restaurant {Restaurant.name} is a good restaurant>'
-    
-    # pizza table
+        return f'<Restaurant {self.name} is a good restaurant>'
+
+
 class Pizza(db.Model):
-    __tablename__ = 'pizzas'
+    __tablename__ = 'pizzas'  
 
     id = db.Column(db.Integer, primary_key=True)
-    price = db.Column(db.Integer)
-
-    restaurants = db.relationship('Restaurant', secondary='restaurant_pizzas', backref='pizzas')
+    name = db.Column(db.String(255), nullable=False)
+    ingredients = db.Column(db.String(255), nullable=False)
 
     def __repr__(self):
-        return f'<Pizza is {Pizza.price} shillings>'
+        return f'<Pizza is {self.name} shillings>'
 
-    # restaurant pizza association table
+
 class RestaurantPizza(db.Model):
-    __tablename__ = 'restaurant_pizzas'
-
+    __tablename__ = 'restaurant_pizzas' 
     id = db.Column(db.Integer, primary_key=True)
     price = db.Column(db.Integer)
     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurants.id'))
     pizza_id = db.Column(db.Integer, db.ForeignKey('pizzas.id'))
 
-    restaurant = db.relationship('Restaurant', backref='restaurant_pizzas')
-    pizza = db.relationship('Pizza', backref='restaurant_pizzas')
+    restaurant = db.relationship('Restaurant', backref='pizzas')
+    pizza = db.relationship('Pizza', backref='restaurants')
 
     def __repr__(self):
         return f'<RestaurantPizza is {self.price} shillings>'
