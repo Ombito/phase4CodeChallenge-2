@@ -1,4 +1,5 @@
-from flask_sqlalchemy import SQLAlchemy, CheckConstraint
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import CheckConstraint
 
 db = SQLAlchemy()
 
