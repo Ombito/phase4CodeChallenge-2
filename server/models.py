@@ -1,4 +1,4 @@
-from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy, CheckConstraint
 
 db = SQLAlchemy()
 
@@ -28,6 +28,12 @@ class RestaurantPizza(db.Model):
     __tablename__ = 'restaurant_pizzas' 
     id = db.Column(db.Integer, primary_key=True)
     price = db.Column(db.Integer)
+
+        # Validate the price 
+    __table_args__ = (
+        CheckConstraint('price >= 1 AND price <= 30', name='check_price_range'),
+    )
+
     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurants.id'))
     pizza_id = db.Column(db.Integer, db.ForeignKey('pizzas.id'))
 

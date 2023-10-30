@@ -12,15 +12,14 @@ function RestaurantList() {
 
   return (
     <div>
-        <h1>Restaurants</h1>
-        <ul>
+        <ol>
             {restaurants.map((restaurant) => (
                 <li key={restaurant.id}>
                 <h2>Name: {restaurant.name}</h2>
                 <p>Address: {restaurant.address}</p>
                 </li>
             ))}
-        </ul>
+        </ol>
     </div>
     
   );

@@ -1,4 +1,3 @@
-// import '../src/Components/main.js';
 import './App.css';
 import Main from './Components/main';
 
