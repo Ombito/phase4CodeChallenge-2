@@ -4,7 +4,7 @@ function RestaurantList() {
   const [restaurants, setRestaurants] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:4000/restaurants')
+    fetch('http://127.0.0.1:5555/restaurants')
       .then((res) => res.json())
       .then((data) => setRestaurants(data))
       .catch((error) => console.error('Error fetching data:', error));
@@ -16,7 +16,7 @@ function RestaurantList() {
         <ul>
             {restaurants.map((restaurant) => (
                 <li key={restaurant.id}>
-                <h2>{restaurant.name}</h2>
+                <h2>Name: {restaurant.name}</h2>
                 <p>Address: {restaurant.address}</p>
                 </li>
             ))}

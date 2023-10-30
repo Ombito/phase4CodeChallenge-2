@@ -1,12 +1,14 @@
-from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 from flask import Flask, jsonify
 from flask_restful import Api, Resource, reqparse
-from models import Restaurant, Pizza, RestaurantPizza
+from models import Restaurant, Pizza, RestaurantPizza, db 
 
 app = Flask(__name__)
+CORS(app)
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+db.init_app(app)
 api = Api(app)
 
 class RestaurantListResource(Resource):
